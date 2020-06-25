@@ -20,19 +20,19 @@ If no one showed it's a virus, it's mainly because it's not, so don't worry 🙂
 
 Use `Ctrl+R` then type `WSCUI.CPL`
 
-![](.gitbook/assets/image%20%284%29.png)
+![](../.gitbook/assets/image%20%284%29.png)
 
 When you are on the Windows Security Center open the Security tab.
 
-![](.gitbook/assets/image%20%285%29.png)
+![](../.gitbook/assets/image%20%285%29.png)
 
 If you are on an old windows 10 version, you will have the name of your antivirus here \(it's the "virus protection" row\).
 
-![Exemple for Windows Defender antivirus](.gitbook/assets/image%20%282%29.png)
+![Exemple for Windows Defender antivirus](../.gitbook/assets/image%20%282%29.png)
 
 Else, if you are on the newer windows 10 version, you will have "View in Windows Security" in the "virus protection" row, click on it and on this new window you should have your antivirus name.
 
-![Exemple for Avast antivirus](.gitbook/assets/image%20%283%29.png)
+![Exemple for Avast antivirus](../.gitbook/assets/image%20%283%29.png)
 
 ### 2. Add the needed exclusions in your antivirus
 
