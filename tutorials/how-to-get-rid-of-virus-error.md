@@ -20,11 +20,11 @@ If no one showed it's a virus, it's mainly because it's not, so don't worry 🙂
 
 Use `Ctrl+R` then type `WSCUI.CPL`
 
-![](.gitbook/assets/image.png)
+![](.gitbook/assets/image%20%284%29.png)
 
 When you are on the Windows Security Center open the Security tab.
 
-![](.gitbook/assets/image%20%281%29.png)
+![](.gitbook/assets/image%20%285%29.png)
 
 If you are on an old windows 10 version, you will have the name of your antivirus here \(it's the "virus protection" row\).
 
