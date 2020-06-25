@@ -6,6 +6,7 @@
 
 * [How to install RaftModLoader](tutorials/how-to-install-raftmodloader/README.md)
   * [Troubleshooting](tutorials/how-to-install-raftmodloader/troubleshooting.md)
+* [How to configure your antivirus](tutorials/how-to-get-rid-of-virus-error.md)
 * [How to install a mod](tutorials/how-to-install-a-mod.md)
 * [Mods in multiplayer](tutorials/mods-in-multiplayer.md)
 * [How to run multiple raft instances](tutorials/how-to-run-multiple-raft-instances.md)
