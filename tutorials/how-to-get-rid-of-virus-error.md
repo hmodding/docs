@@ -59,6 +59,17 @@ To add the exceptions in BitDefender you can follow the next link :
 [https://www.bitdefender.com/consumer/support/answer/13427/](https://www.bitdefender.com/consumer/support/answer/13427/)
 {% endtab %}
 
+{% tab title="Norton" %}
+1. Check out this help article by Norton to add the files listed above to the exceptions list: [https://support.norton.com/sp/en/us/home/current/solutions/v3672136](https://support.norton.com/sp/en/us/home/current/solutions/v3672136)
+2. If Raft Mod Loader can't connect to the internet, you'll need to add an exception to your firewall too:
+   1. Open My Norton
+   2. Go to Settings -&gt; Firewall -&gt; Application Control
+   3. Use the search function to find `HML`
+   4. Allow network access for `HML`
+
+_Thanks to Sly for providing instructions for Norton!_
+{% endtab %}
+
 {% tab title="Others antivirus" %}
 Type on google "How to add an exclusion in " and the name of your antivirus after, then go on the website of your antivirus and follow the step for the two files above
 {% endtab %}
