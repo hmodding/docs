@@ -41,7 +41,7 @@ Now you will have to have 2 exclusions in your antivirus to avoid all the false 
 The two files are those ones :
 
 * `RMLLauncher.exe`
-* `C:\Users\Your user name\AppData\Roaming\RaftModLauncher\`
+* `C:\Users\Your user name\AppData\Roaming\RaftModLoader`
 
 {% tabs %}
 {% tab title="Windows Defender" %}
