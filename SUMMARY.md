@@ -27,6 +27,7 @@
 
 * [Reading private variables](client-code-examples/untitled.md)
 * [Modifying private variables](client-code-examples/modifying-private-variables.md)
+* [Adding private variables](client-code-examples/adding-private-variables.md)
 * [Accessing the player instance](client-code-examples/accessing-the-player-instance.md)
 * [Giving items to a player](client-code-examples/giving-items-to-a-player.md)
 * [Dropping/Spawning items](client-code-examples/dropping-spawning-items.md)
