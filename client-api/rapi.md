@@ -85,13 +85,13 @@ Gets the local Network\_Player script.
 {% tabs %}
 {% tab title="Method" %}
 ```csharp
-Network_Player getLocalPlayer()
+Network_Player GetLocalPlayer()
 ```
 {% endtab %}
 
 {% tab title="Example" %}
 ```csharp
-Network_Player player = RAPI.getLocalPlayer();
+Network_Player player = RAPI.GetLocalPlayer();
 // The player variable will contain the local player script.
 ```
 {% endtab %}
