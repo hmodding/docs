@@ -13,14 +13,14 @@
 
 ## MODDING TUTORIALS
 
-* [How to create a mod project](modding-tutorials/how-to-create-a-mod-project.md)
+* [How to create a mod project](modding-tutorials/how-to-create-a-mod-project/README.md)
+  * [The modinfo.json file](modding-tutorials/how-to-create-a-mod-project/the-modinfo.json-file.md)
 * [How to create an AssetBundle](modding-tutorials/how-to-create-an-assetbundle.md)
-* [How to embed an assetbundle](modding-tutorials/how-to-embed-an-assetbundle.md)
+* [How to create console commands](modding-tutorials/how-to-create-console-commands.md)
 
 ## Client - API
 
 * [RAPI](client-api/rapi.md)
-* [RConsole](client-api/rconsole.md)
 * [Mod Events](client-api/mod-events.md)
 
 ## Client - Code Examples
@@ -33,7 +33,6 @@
 * [Dropping/Spawning items](client-code-examples/dropping-spawning-items.md)
 * [Printing to the console](client-code-examples/printing-to-the-console.md)
 * [Execute code on world loading](client-code-examples/execute-code-on-world-loading.md)
-* [Playing custom audio files](client-code-examples/playing-custom-audio-files.md)
 * [Get the current SteamID](client-code-examples/get-the-current-steamid.md)
 * [Get the current username](client-code-examples/get-the-current-username.md)
 * [Get selected hotbar item](client-code-examples/get-selected-hotbar-item.md)

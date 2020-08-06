@@ -1,14 +1,12 @@
 # Adding private variables
 
-Adding private variables to an existing Raft class is sometimes very necessary. There're many ways to add new variables.
-In this article we will consider the method provided by [Whitebrim](https://www.raftmodding.com/user/Whitebrim).
+## Adding private variables
 
-We will store variables in the newly created class and add an extension for original Raft class.
-You can read how C# extensions work [here](https://docs.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods).
+Adding private variables to an existing Raft class is sometimes very necessary. There're many ways to add new variables. In this article we will consider the method provided by [Whitebrim](https://www.raftmodding.com/user/Whitebrim).
 
-If your class has only one instance you can add **static private variable**.
-If not, you need to add `Dictionary<class, variable>` that will contain variables for each class instance.
+We will store variables in the newly created class and add an extension for original Raft class. You can read how C\# extensions work [here](https://docs.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods).
 
+If your class has only one instance you can add **static private variable**. If not, you need to add `Dictionary<class, variable>` that will contain variables for each class instance.
 
 In this example we will add new `private bool isLocked` variable to `SteeringWheel` class:
 
@@ -40,7 +38,6 @@ public static class SteeringWheelExtension
 }
 ```
 
-
 Then you need to **patch original class**. In our case we need to change displaying text depending on `IsLocked` state. We will patch `OnIsRayed()` methon inside `SteeringWheel` class:
 
 ```csharp
@@ -60,7 +57,6 @@ class SteeringWheelPatchOnIsRayed
 }
 ```
 
-
 You can read more about **Harmony patching** [here](https://github.com/pardeike/Harmony/wiki/Patching).
 
 Also you need to **apply patch**:
@@ -75,7 +71,7 @@ public class BetterSteeringWheel : Mod
         harmonyInstance = HarmonyInstance.Create("com.whitebrim.bettersteeringwheel"); // It's custom patch name, you need to name your patch differently
         harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
     }
-    
+
     public void OnModUnload()
     {
         harmonyInstance.UnpatchAll();
@@ -84,11 +80,7 @@ public class BetterSteeringWheel : Mod
 }
 ```
 
-
 You can access new variable using class instance. `SteeringWheel.IsLocked()`, `SteeringWheel.Lock(bool newValue)`.
-
-
-
 
 Example for **`float`** and **`string`**:
 
@@ -138,16 +130,13 @@ public static class CustomExtension
 }
 ```
 
-
-
-
-# Saving private variables
+## Saving private variables
 
 To save private variables you need to patch `RDG_%RaftClassName%` class and method that is invoked inside switch in `SaveAndLoad` class in `RestoreRGDGame(RGD_Game game)` method.
 
-In this example we will use `SteeringWheel` class and save `IsLocked` variable (from `Adding private variables` section).
+In this example we will use `SteeringWheel` class and save `IsLocked` variable \(from `Adding private variables` section\).
 
-**First**, we have to add new link `RGD Class -> our variable` (Dictionary):
+**First**, we have to add new link `RGD Class -> our variable` \(Dictionary\):
 
 ```csharp
 public static class SteeringWheelExtension
@@ -166,8 +155,7 @@ public static class SteeringWheelExtension
 }
 ```
 
-**Second**, we need to patch `RGD_SteeringWheel` class.
-There're two constructors (one for saving, another for loading) and `GetObjectData` method (to control flow of Serialization).
+**Second**, we need to patch `RGD_SteeringWheel` class. There're two constructors \(one for saving, another for loading\) and `GetObjectData` method \(to control flow of Serialization\).
 
 ```csharp
 class RGD_SteeringWheelPatch
@@ -208,9 +196,7 @@ class RGD_SteeringWheelPatch
 }
 ```
 
-
-**Lastly**, we need to find method that loads saved block data and patch it.
-This method is invoked inside switch in `SaveAndLoad` class in `RestoreRGDGame(RGD_Game game)` method:
+**Lastly**, we need to find method that loads saved block data and patch it. This method is invoked inside switch in `SaveAndLoad` class in `RestoreRGDGame(RGD_Game game)` method:
 
 ```csharp
 switch (rgd.type)
@@ -228,8 +214,7 @@ switch (rgd.type)
     //etc...
 ```
 
-
-Our *case*:
+Our _case_:
 
 ```csharp
 case RGDType.Block_SteeringWheel:
@@ -248,10 +233,7 @@ case RGDType.Block_SteeringWheel:
     }
 ```
 
-
-In our case method is called `RestoreWheel(RGD_SteeringWheel rgdWheel)`.
-This method contains instructions on how to deserialize RGD class to retrieve saved data.
-We will add our custom instructions:
+In our case method is called `RestoreWheel(RGD_SteeringWheel rgdWheel)`. This method contains instructions on how to deserialize RGD class to retrieve saved data. We will add our custom instructions:
 
 ```csharp
 [HarmonyPatch(typeof(SteeringWheel), "RestoreWheel")]
@@ -266,5 +248,5 @@ class SteeringWheelRestoreWheelPatch
 }
 ```
 
-
 **Congratulations**, our custom data for Steering Wheel is saving and loading successfully.
+
