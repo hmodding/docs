@@ -12,7 +12,7 @@ RMLLauncher is injecting code \(mods\) in a running process \(the game\), and th
 If you are worried and not sure if you want to download it because of that, you can go on the[ RaftModding discord server](https://discord.gg/r83T8Q) or on the [official raft server](https://discord.gg/raft) to ask on the modding area what others user thinks of RML.
 
 {% hint style="success" %}
-Actually the RMLLauncher and Core are open-sourced, then it's analysed by users of this launcher and modders that have the knowledge to analyse it.  
+Actually the RMLLauncher and Core are [open-sourced](https://gitlab.com/TeKGameR950/HyTeKModLoader), then it's analysed by users of this launcher and modders that have the knowledge to analyse it.  
 If no one showed it's a virus, it's mainly because it's not, so don't worry 🙂
 {% endhint %}
 
