@@ -26,31 +26,15 @@ On a mod's page you can find all information about a mod. You'll now need to dow
 
 ![Download the mod of your choice](../.gitbook/assets/capture.png)
 
-### 4. Locating your mods folder
+### 4. Installing the mod
 
-Open the RaftModLoader Launcher and click on the `Mods Folder` button as shown below. Your system should now open a window showing the mods folder.
+Double Click the `.rmod` file then click `Yes, Install It` 
 
-![Click on Mods Folder to open the mod folder.](../.gitbook/assets/capture%20%284%29.png)
+![Press Yes, Install it](../.gitbook/assets/unknown.png)
 
-### 5. Extracting the mod
 
-This step is a little bit different if your mod is a `.cs` mod or if its a `.zip` mod. So click on the corresponding tab below.
 
-{% tabs %}
-{% tab title="Your mod is a .cs mod" %}
-After clicking on the **Mods Folder** button it will open your mods folder, drag and drop the downloaded .cs mod file in it as shown below.
-
-![Drag and drop the downloaded file into the mods folder.](../.gitbook/assets/capture%20%281%29.png)
-{% endtab %}
-
-{% tab title="Your mod is a .zip mod" %}
-After clicking on the **Mods Folder** button it will open your mods folder. Open the downloaded .zip mod and extract its content to your mods folder as shown below. Make sure to extract everything inside the zip-archive.
-
-![Extract the zip-archive&apos;s contents to your mods folder](../.gitbook/assets/howtoinstallacontentmod.gif)
-{% endtab %}
-{% endtabs %}
-
-### 6. Loading the mod
+### 5. Loading the mod
 
 We're already done with installing the mod! Let's see how to load it in the game. Start the game by using the launcher and clicking on the **play** button. When the game has loaded go to the **Mod Manager** tab and if the mod has **load** button click on it as shown below. You will have to click `Load Mod` every time you start Raft.
 
@@ -60,7 +44,7 @@ If the mod you downloaded doesn't have a **load** button but has a **blue button
 
 ![Permanent mods are loaded automatically](../.gitbook/assets/b.png)
 
-### 7. Done?
+### 6. Done?
 
 If everything has worked out, the mod status should be green and the text should say **RUNNING...** as shown below.
 
