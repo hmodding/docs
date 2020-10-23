@@ -2,10 +2,10 @@
 
 Reading private variables is clearly necessary when modding raft. Let's see how easy it is!
 
-To access private variables we need to use **Harmony**. You can visit the Harmony wiki by clicking [here](https://github.com/pardeike/Harmony/wiki).  
+To access private variables we need to use **Harmony**. You can visit the Harmony wiki by clicking [here](https://harmony.pardeike.net/).  
 _`Harmony is a library for patching, replacing and decorating .NET and Mono methods during runtime.`_  
   
-To use harmony you simply need to add the `HarmonyLib` namespace by adding `using HarmonyLib;` at the top of your class.
+To get Visual Studio autocomplete to work you need to install the Nuget package Lib.Harmony version 2. Then, to use harmony you simply need to add the `HarmonyLib` namespace by adding `using HarmonyLib;` at the top of your class. You don't need to install the nuget package for Raft to compile the code, but it makes developing easier.
 
   
 To access a **non-static private variable** you use Traverse.Create\(\) with the object instance and .Field\(\) with the field name.
