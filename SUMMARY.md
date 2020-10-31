@@ -17,6 +17,7 @@
   * [The modinfo.json file](modding-tutorials/how-to-create-a-mod-project/the-modinfo.json-file.md)
 * [How to create an AssetBundle](modding-tutorials/how-to-create-an-assetbundle.md)
 * [How to create console commands](modding-tutorials/how-to-create-console-commands.md)
+* [Harmony basics](modding-tutorials/harmony-basics)
 
 ## Client - API
 

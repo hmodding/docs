@@ -108,9 +108,37 @@ Transpilers are a much more advanced way to get your own code to run. It is a bi
 
 To give a simplified overview: Instead of writing code to be executed, you are looking at all of the IL instructions that a chunk of code represents and doing some of your own instructions whenever you think the right time is. 
 
+There are also wonderful tools out there that help show you what your IL code will look like from C# code snippets. Try checking out [LINQPad](https://www.linqpad.net/)  
+
 ---
 ###### [HarmonyTargetMethod]
-I'll be honest I don't understand this one and works other than it is a different way to tell Harmony which method you are changing instead of using the class attribute
+TargetMethod is another powerful tool that lets you reuse your code and apply changes to multiple different methods. It can also be used to conditionally apply changes based on what the code finds. 
+
+TargetMethod must return a MethodBase type which points at which method your patch will apply to. Alternatively [HarmonyTargetMethods] can be used to apply the same patch logic to multiple methods as well though in this case it expects some IEnumerable collection of MethodBases.
+
+Two different ways of doing this would be to iterate through, patching all methods:
+```csharp
+	[HarmonyTargetMethods]
+	static IEnumerable<MethodBase> PatchInventoryMethods()
+	{
+		yield return AccessTools.Method(typeof(Inventory), "Add");
+		yield return AccessTools.Method(typeof(Inventory), "Remove");
+		// you could also iterate using reflections over many methods
+	}
+```
+
+or, affect a group of methods that you collect:
+```csharp
+	[HarmonyTargetMethods]
+	IEnumerable<MethodBase> PatchAllPlayerMethods()
+    {
+		//Find all non-void methods beginning with "Player"
+        return AccessTools.GetTypesFromAssembly(someAssembly)
+            .SelectMany(type => type.GetMethods())
+            .Where(method => method.ReturnType != typeof(void) && method.Name.StartsWith("Player"))
+            .Cast<MethodBase>();
+    }
+```
 
 ---
 ### Valid Patch Rules
@@ -176,6 +204,9 @@ public void OnModUnload()
     }
 ```
 
+
 In older versions you needed to `Destroy()` the mod object when unloading but that is also handled gracefully these days.
 
-## Traversing
+
+###### _Written by: Soggylithe    10/31/2020_
+###### _Feel free to @Soggylithe in the [RaftModding Discord ](https://www.raftmodding.com/discord) if you have any questions._
