@@ -17,9 +17,9 @@ public class HarmonyPatch_IgnoreCollisionOnAlt
 	static bool IsCoolModInstalled()
 	{...}
 	
-    [HarmonyPostfix]
-    static BuildError CheckForAlt(BuildError __result)
-    {...}
+	[HarmonyPostfix]
+	static BuildError CheckForAlt(BuildError __result)
+	{...}
 }
 ```
 With one or more static methods that add or act on the target code.
@@ -74,16 +74,16 @@ You can also use this method to store values that can be accessed in the Postfix
 
 ```csharp
 	static void Prefix(out Stopwatch __state)
-    {
-        __state = new Stopwatch(); // Stopwatch is a custom timer class
-        __state.Start();
-    }
+	{
+		__state = new Stopwatch(); // Stopwatch is a custom timer class
+		__state.Start();
+	}
 
-    static void Postfix(Stopwatch __state)
-    {
-        __state.Stop();
-        FileLog.Log(__state.Elapsed.ToString());
-    }
+	static void Postfix(Stopwatch __state)
+	{
+		__state.Stop();
+		FileLog.Log(__state.Elapsed.ToString());
+	}
 ```
 
 
@@ -131,13 +131,13 @@ or, affect a group of methods that you collect:
 ```csharp
 	[HarmonyTargetMethods]
 	IEnumerable<MethodBase> PatchAllPlayerMethods()
-    {
+	{
 		//Find all non-void methods beginning with "Player"
-        return AccessTools.GetTypesFromAssembly(someAssembly)
-            .SelectMany(type => type.GetMethods())
-            .Where(method => method.ReturnType != typeof(void) && method.Name.StartsWith("Player"))
-            .Cast<MethodBase>();
-    }
+		return AccessTools.GetTypesFromAssembly(someAssembly)
+			.SelectMany(type => type.GetMethods())
+			.Where(method => method.ReturnType != typeof(void) && method.Name.StartsWith("Player"))
+			.Cast<MethodBase>();
+	}
 ```
 
 ---
@@ -180,27 +180,27 @@ Then you need to create a new instance of Harmony with an id for your set of pat
 Then we tell the Harmony instance to patch everything it can find in our code. In older versions you need to tell Harmony to look for the currently running game with `Assembly.GetExecutingAssembly()` to try and patch it but these days it will look there by default.
 
 ```csharp
-public void Start()
-    {
-        MyInput.Keybinds.Add("Alt", new Keybind("alt", KeyCode.LeftAlt, KeyCode.RightAlt));
+	public void Start()
+	{
+		MyInput.Keybinds.Add("Alt", new Keybind("alt", KeyCode.LeftAlt, KeyCode.RightAlt));
 
-        harmonyInstance = new Harmony("com.Soggylithe.IgnoreBuildCollision");
-        harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
+		harmonyInstance = new Harmony("com.Soggylithe.IgnoreBuildCollision");
+		harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
 
-        Debug.Log("Place Anywhere successfully loaded! - Default-AltKey");
-    }
+		Debug.Log("Place Anywhere successfully loaded! - Default-AltKey");
+	}
 ```
 
 Remember, anything you do to load your mod you need to undo when you unload it to prevent strange errors and to keep the client stable. This also means you need to tell your Harmony instance to unpatch the things you changed.
 
 ```csharp
-public void OnModUnload()
-    {
-        MyInput.Keybinds.Remove("Alt");
+	public void OnModUnload()
+	{
+		MyInput.Keybinds.Remove("Alt");
 
-        harmonyInstance.UnpatchAll();
-        Destroy(gameObject);
-        Debug.Log("Mod Brine has been unloaded!");
+		harmonyInstance.UnpatchAll();
+		Destroy(gameObject);
+		Debug.Log("Mod Brine has been unloaded!");
     }
 ```
 
