@@ -42,7 +42,7 @@ Then once the game has loaded you should have a new menu in the Raft main menu a
 
 Congratulations! If you made it this far, you have successfully installed RaftModLoader! Now you might want to install some actual mods. Click the next links for our guide on installing mods:
 
-{% page-ref page="../how-to-install-a-mod.md" %}
+{% page-ref page="../how-to-install-a-mod/" %}
 
 If something isn't working as expected, maybe take a look at our troubleshooting guide:
 
