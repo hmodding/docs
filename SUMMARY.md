@@ -19,6 +19,7 @@
 * [How to create an AssetBundle](modding-tutorials/how-to-create-an-assetbundle.md)
 * [How to create console commands](modding-tutorials/how-to-create-console-commands.md)
 * [Harmony basics](modding-tutorials/harmony-basics.md)
+* [Getting access to the modding repositories](modding-tutorials/getting-access-to-the-modding-repositories.md)
 
 ## Client - API
 
