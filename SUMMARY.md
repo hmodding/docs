@@ -42,7 +42,6 @@
 ## Website
 
 * [Slugs](website/slugs.md)
-* [Mods with multiple files](website/mods-with-multiple-files.md)
 
 ## Server - API
 
