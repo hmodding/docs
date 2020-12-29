@@ -7,7 +7,8 @@
 * [How to install RaftModLoader](tutorials/how-to-install-raftmodloader/README.md)
   * [Troubleshooting](tutorials/how-to-install-raftmodloader/troubleshooting.md)
 * [How to configure your antivirus](tutorials/how-to-get-rid-of-virus-error.md)
-* [How to install a mod](tutorials/how-to-install-a-mod.md)
+* [How to install a mod](tutorials/how-to-install-a-mod/README.md)
+  * [Alternative mod installation methods](tutorials/how-to-install-a-mod/alternative-mod-installation-methods.md)
 * [Mods in multiplayer](tutorials/mods-in-multiplayer.md)
 * [How to run multiple raft instances](tutorials/how-to-run-multiple-raft-instances.md)
 
@@ -17,7 +18,8 @@
   * [The modinfo.json file](modding-tutorials/how-to-create-a-mod-project/the-modinfo.json-file.md)
 * [How to create an AssetBundle](modding-tutorials/how-to-create-an-assetbundle.md)
 * [How to create console commands](modding-tutorials/how-to-create-console-commands.md)
-* [Harmony basics](modding-tutorials/harmony-basics)
+* [Harmony basics](modding-tutorials/harmony-basics.md)
+* [Getting access to the modding repositories](modding-tutorials/getting-access-to-the-modding-repositories.md)
 
 ## Client - API
 
@@ -41,7 +43,6 @@
 ## Website
 
 * [Slugs](website/slugs.md)
-* [Mods with multiple files](website/mods-with-multiple-files.md)
 
 ## Server - API
 

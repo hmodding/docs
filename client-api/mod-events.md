@@ -23,9 +23,9 @@ public override void WorldEvent_WorldLoaded()
 | **`void WorldEvent_WorldLoaded()`** | Called when the world is loaded. |
 | **`void WorldEvent_WorldSaved()`** | Called when the world is saved. |
 | **`void LocalPlayerEvent_Hurt(float damage, Vector3 hitPoint, Vector3 hitNormal, EntityType damageInflictorEntityType)`** | Called when the local player gets hurt. |
-| **`void LocalPlayerEvent_Death(Vector3 deathPosition)`** | Called when the local player die. |
-| **`void LocalPlayerEvent_Respawn()`** | Called when the local player respawn. |
-| **`void LocalPlayerEvent_ItemCrafted(Item_Base item)`** | Called when the local player craft an item. |
-| **`void LocalPlayerEvent_PickupItem(PickupItem item)`** | Called when the local player pickup an item. |
-| **`void LocalPlayerEvent_DropItem(ItemInstance item, Vector3 position, Vector3 direction, bool parentedToRaft)`** | Called when the local player drop an item. |
+| **`void LocalPlayerEvent_Death(Vector3 deathPosition)`** | Called when the local player dies. |
+| **`void LocalPlayerEvent_Respawn()`** | Called when the local player respawns. |
+| **`void LocalPlayerEvent_ItemCrafted(Item_Base item)`** | Called when the local player crafts an item. |
+| **`void LocalPlayerEvent_PickupItem(PickupItem item)`** | Called when the local player picks up an item. |
+| **`void LocalPlayerEvent_DropItem(ItemInstance item, Vector3 position, Vector3 direction, bool parentedToRaft)`** | Called when the local player drops an item. |
 
