@@ -60,5 +60,5 @@ If you want to know more about this file, how to add an icon, what is the exclud
 
 ![](../../.gitbook/assets/aa%20%281%29.png)
 
-**And here is it! You made your first mod project! Keep in mind this tutorial is just the requirements & basics! More advanced tutorials are coming soon!**
+**And here it is! You made your first mod project! Keep in mind this tutorial is just the requirements & basics! More advanced tutorials are coming soon!**
 
