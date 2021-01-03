@@ -38,7 +38,7 @@ The method attribute lets Harmony know "when" to use the code in the patch. Ther
 
 ### \[HarmonyPrepare\]
 
-This lets you chech some things before the patch takes place to see if you even want to change something.
+This lets you check some things before the patch takes place to see if you even want to change something.
 
 This method expects you to return `false` to indicate Harmony should skip this patch.
 
