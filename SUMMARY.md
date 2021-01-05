@@ -6,6 +6,7 @@
 
 * [How to install RaftModLoader](tutorials/how-to-install-raftmodloader/README.md)
   * [Troubleshooting](tutorials/how-to-install-raftmodloader/troubleshooting.md)
+  * [How to install RaftModLoader on Linux](tutorials/how-to-install-raftmodloader/on-linux.md)
 * [How to configure your antivirus](tutorials/how-to-get-rid-of-virus-error.md)
 * [How to install a mod](tutorials/how-to-install-a-mod/README.md)
   * [Alternative mod installation methods](tutorials/how-to-install-a-mod/alternative-mod-installation-methods.md)
