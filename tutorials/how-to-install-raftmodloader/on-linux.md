@@ -28,7 +28,7 @@ If your graphics card supports Vulkan rendering then you shouldn't skip this ste
 WINEPREFIX="$(dirname ~/.wine)/.wine" ./setup_dxvk.sh install
 ```
 
-![](https://i.imgur.com/snu3v5h.png)
+![](../../.gitbook/assets/dxvk.png)
 
 ## 4. Use RaftModLoader as you're on Windows
 Run RMLLauncher via Wine: `wine64 ~/Downloads/RMLLauncher.exe`. It'll ask you for your Raft folder. From what I've checked, updating is fine, injections work and Raft starts. If you have issues, contact @null#0170 on Discord.
