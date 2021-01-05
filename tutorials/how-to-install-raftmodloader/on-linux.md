@@ -32,3 +32,14 @@ WINEPREFIX="$(dirname ~/.wine)/.wine" ./setup_dxvk.sh install
 
 ## 4. Use RaftModLoader as you're on Windows
 Run RMLLauncher via Wine: `wine64 ~/Downloads/RMLLauncher.exe`. It'll ask you for your Raft folder. From what I've checked, updating is fine, injections work and Raft starts. If you have issues, contact @null#0170 on Discord.
+
+# Known Issues
+
+## Raft won't respond after Alt+Tab
+There's nothing I can do to that - it's a issue that happens on many other Unity games, especially when they're running on Wine. From what I've seen, changing focus to a window on another monitor doesn't trigger this. 
+
+## Injection failed
+Wait a second, Raft will open and mods will still work.
+
+## The program `csc.exe` has stopped unexpectedly
+I think this can be fixed by using Mono's `csc` but that would probably involve changes in RML's code.
