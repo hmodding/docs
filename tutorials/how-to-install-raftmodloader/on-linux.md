@@ -43,3 +43,5 @@ Wait a second, Raft will open and mods will still work.
 
 ## The program `csc.exe` has stopped unexpectedly
 I think this can be fixed by using Mono's `csc` but that would probably involve changes in RML's code.
+
+# Written by [@RMuskovets](https://github.com/RMuskovets) AKA @null#0170
