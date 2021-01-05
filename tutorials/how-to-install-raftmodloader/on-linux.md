@@ -14,6 +14,8 @@ Go to your Windows PC, find the Raft installation folder (explained [here](https
 ## 1. Download the Launcher
 The same as you would do on Windows. Go to the [download page](https://www.raftmodding.com/download) and place it somewhere (for example, I placed it in `~/Desktop/Raft` - my Raft folder).
 
+![](../../.gitbook/assets/download.png)
+
 ## 2. Install Mono and .NET 4.6
 First of all, if you haven't already, install `winetricks`. On Ubuntu it's just `sudo apt install winetricks`.
 
@@ -25,6 +27,8 @@ If your graphics card supports Vulkan rendering then you shouldn't skip this ste
 ```bash
 WINEPREFIX="$(dirname ~/.wine)/.wine" ./setup_dxvk.sh install
 ```
+
+![](https://i.imgur.com/snu3v5h.png)
 
 ## 4. Use RaftModLoader as you're on Windows
 Run RMLLauncher via Wine: `wine64 ~/Downloads/RMLLauncher.exe`. It'll ask you for your Raft folder. From what I've checked, updating is fine, injections work and Raft starts. If you have issues, contact @null#0170 on Discord.
