@@ -28,4 +28,8 @@ public override void WorldEvent_WorldLoaded()
 | **`void LocalPlayerEvent_ItemCrafted(Item_Base item)`** | Called when the local player crafts an item. |
 | **`void LocalPlayerEvent_PickupItem(PickupItem item)`** | Called when the local player picks up an item. |
 | **`void LocalPlayerEvent_DropItem(ItemInstance item, Vector3 position, Vector3 direction, bool parentedToRaft)`** | Called when the local player drops an item. |
+| **`void LocalPlayerEvent_OnRespawn()`** | Called when the local player respawn. |
+| **`void WorldEvent_OnPlayerConnected(CSteamID steamid, RGD_Settings_Character characterSettings)`** | Called when a player join the world. |
+| **`void WorldEvent_OnPlayerDisconnected(CSteamID steamid, DisconnectReason disconnectReason)`** | Called when a player leave the world. |
+| **`void WorldEvent_WorldUnloaded()`** | Called when the world is unloaded \(Getting back to main menu\). |
 
