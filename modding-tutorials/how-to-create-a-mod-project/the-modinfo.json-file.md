@@ -47,6 +47,16 @@ Here is a list of all the fields of the modinfo.json file and a small descriptio
       </td>
     </tr>
     <tr>
+      <td style="text-align:left"><b>requiredByAllPlayers</b>
+      </td>
+      <td style="text-align:left">
+        <p>Type : <b>Bool</b>
+        </p>
+        <p>Description : <b>Is the mod required by all players to work?</b>
+        </p>
+      </td>
+    </tr>
+    <tr>
       <td style="text-align:left"><b>version</b>
       </td>
       <td style="text-align:left">
@@ -151,6 +161,9 @@ Here is a list of all the fields of the modinfo.json file and a small descriptio
 RaftModLoader fetch this link to know what is the latest available version of your mod, if the currently installed version is not equal to the version returned by this url it will say that the mod is outdated.  
 Our website offer this service with a nice automation system. Available on the following link once you have a mod slug.**  
  `https://www.raftmodding.com/api/v1/mods/`**`YOURMODSLUG`**`/version.txt`
+
+**requiredByAllPlayers Field :  
+If this field is set to true and the mod is loaded it will kick any player attempting to join that does not have the same mod and the same version. If your mod adds new items or new blocks, this definitely needs to be true! So nobody will be able to join with missing blocks!**
 
 **ExcludedFiles Field :   
 This is a simple list of excluded files as shown below.**
