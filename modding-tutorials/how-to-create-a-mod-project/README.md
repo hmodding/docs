@@ -9,7 +9,7 @@ description: >-
 Let's get started with the requirements! To get started modding you will need the following softwares :‌
 
 * **​**[**Visual Studio Community**](https://visualstudio.microsoft.com/downloads/). We highly recommend you to download the 2019 version.
-* \*\*\*\*[**Unity 2018.3.5f1**](https://unity3d.com/unity/whats-new/2018.3.5). If you have [UnityHub](https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.exe) installed simply click [here](http://fastdl.raftmodding.com/downloadRaftUnityVersion.php).
+* [**Unity 2019.3.5f1**](https://unity3d.com/fr/unity/whats-new/2019.3.5). If you have [UnityHub](https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.exe) installed simply click [here](http://fastdl.raftmodding.com/downloadRaftUnityVersion.php).
 * **​**[**dnSpy**](https://github.com/0xd4d/dnSpy/releases/latest). This is the latest available version.
 
 {% hint style="danger" %}
