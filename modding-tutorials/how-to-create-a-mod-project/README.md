@@ -16,8 +16,6 @@ Let's get started with the requirements! To get started modding you will need th
 **You have to use Unity 2018.3.5f1! Using another version is not supported!**
 {% endhint %}
 
-
-
 Now that you have the required softwares, let's create your mod project!‌
 
 **1\)** Open the RMLLLauncher and create a mod project by using the mod creator as shown below.‌
@@ -60,5 +58,5 @@ If you want to know more about this file, how to add an icon, what is the exclud
 
 ![](../../.gitbook/assets/aa%20%281%29.png)
 
-**And here is it! You made your first mod project! Keep in mind this tutorial is just the requirements & basics! More advanced tutorials are coming soon!**
+**And here it is! You made your first mod project! Keep in mind this tutorial is just the requirements & basics! More advanced tutorials are coming soon!**
 

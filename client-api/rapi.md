@@ -162,3 +162,49 @@ RAPI.RemoveItemFromBlockQuadType("YourItemUniqueName", RBlockQuadType.quad_found
 {% endtab %}
 {% endtabs %}
 
+Listen for network messages on a specific network channel. \(0 and 1 are locked for the game and can't be used\)
+
+{% tabs %}
+{% tab title="Method" %}
+```csharp
+NetworkMessage ListenForNetworkMessagesOnChannel(int channel = 0)
+```
+{% endtab %}
+
+{% tab title="Example" %}
+```csharp
+// Choose a unique ID for the channel id to not interfer with other mods.
+NetworkMessage netMessage = RAPI.ListenForNetworkMessagesOnChannel(30);
+if (netMessage != null)
+{
+  CSteamID id = netMessage.steamid;
+  Message message = netMessage.message;
+  // Here we use 5000 because we can't modify an enum, you can use any values 
+  // as long as its not in the Messages enum already. Bigger than 1000 is perfect.
+  if(message.Type == (Messages)5000){
+    // Do your stuff with the message now that you know 
+    // its yours and its the wanted type.
+    YourMessageClass msg = message as YourMessageClass;
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+Send a network message to all players.
+
+{% tabs %}
+{% tab title="Method" %}
+```csharp
+void SendNetworkMessage(Message message, int channel = 0, EP2PSend ep2psend = EP2PSend.k_EP2PSendReliable, Target target = Target.Other, CSteamID fallbackSteamID = new CSteamID())
+```
+{% endtab %}
+
+{% tab title="Example" %}
+```csharp
+// This will send your network message to all players.
+RAPI.SendNetworkMessage(new YourMessageClass((Messages)5000));
+```
+{% endtab %}
+{% endtabs %}
+
