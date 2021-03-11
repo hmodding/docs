@@ -13,7 +13,7 @@ Let's get started with the requirements! To get started modding you will need th
 * **​**[**dnSpy**](https://github.com/0xd4d/dnSpy/releases/latest). This is the latest available version.
 
 {% hint style="danger" %}
-**You have to use Unity 2018.3.5f1! Using another version is not supported!**
+**You have to use Unity 2019.3.5f1! Using another version is not supported!**
 {% endhint %}
 
 Now that you have the required softwares, let's create your mod project!‌
