@@ -53,7 +53,7 @@ We're no law experts and this is no real legal advice. You are responsible for y
 For the purpose of verification, the process of getting access is a bit tedious.
 
 1. In your Steam profile, make sure that the list of your owned games is visible to everyone. We need to be able to see your games list to verify that you own Raft.
-2. Send a direct message to `@TeK#6884` or `@traxam#7012` via Discord and tell us that you want access to the Raft repositories. Make sure to include a link to your Steam profile as well as your GitLab.com username or email address! \(alternatively, you can contact us via [mail](mailto:traxam@raftmodding.com)\)
+2. Send a direct message to `@TeK#6884`, `@traxam#7012` or `Fynikoto#6943` via Discord and tell us that you want access to the Raft repositories. Make sure to include a link to your Steam profile as well as your GitLab.com username or email address! \(alternatively, you can contact us via [mail](mailto:traxam@raftmodding.com)\)
 3. We will check your Steam profile and send you a response as soon as possible. Please keep in mind that for us, RaftModding is a free-time project and it might take a while until we answer.
 4. In some cases, we will ask for additional proof to make sure that the profiles are really from you.
 5. When we've accepted your verification, we will send you another message and add you to a GitLab group that will allow you to access the repositories. You can find the links to the repos at the [top of this article](getting-access-to-the-modding-repositories.md#whats-contained-in-the-repositories). 
