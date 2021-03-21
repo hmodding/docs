@@ -2,43 +2,56 @@
 
 ## Adding private variables
 
-Adding private variables to an existing Raft class is sometimes very necessary. There're many ways to add new variables. In this article we will consider the method provided by [Whitebrim](https://www.raftmodding.com/user/Whitebrim).
+Adding private variables to an existing Raft class is sometimes very necessary. There're many ways to add new variables. In this article we will consider the method provided by [Whitebrim](https://www.raftmodding.com/user/Whitebrim). (Discord Whitebrim#4444)
 
 We will store variables in the newly created class and add an extension for original Raft class. You can read how C\# extensions work [here](https://docs.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods).
 
-If your class has only one instance you can add **static private variable**. If not, you need to add `Dictionary<class, variable>` that will contain variables for each class instance.
+We need to create new **`ConditionalWeakTable<TKey, TValue>`**. It will store our data classes and link them to original classes. This class is specifically created for our case, if you're interested you can read more about it [here](https://docs.microsoft.com/ru-ru/dotnet/api/system.runtime.compilerservices.conditionalweaktable-2?view=netframework-4.5).
 
-In this example we will add new `private bool isLocked` variable to `SteeringWheel` class:
+In this example we will add new **`private bool isLocked`** variable to **`SteeringWheel`** class:
 
-First, we need to **create an extension class** to store and handle variables:
+**First**, we need to **create data class** to store all data we need to add:
 
 ```csharp
-public static class SteeringWheelExtension
+[Serializable]
+public class SteeringWheelAdditionalData
 {
-    private static Dictionary<SteeringWheel, bool> isLocked = new Dictionary<SteeringWheel, bool>();
+    public bool isLocked;
 
-    public static bool IsLocked(this SteeringWheel steeringWheel)
+    public SteeringWheelAdditionalData()
     {
-        if (!isLocked.ContainsKey(steeringWheel))
-        {
-            isLocked.Add(steeringWheel, false); // False is default value for isLocked bool in our case
-        }
-        return isLocked[steeringWheel];
-    }
-
-    public static void Lock(this SteeringWheel steeringWheel, bool value)
-    {
-        if (!isLocked.ContainsKey(steeringWheel))
-        {
-            isLocked.Add(steeringWheel, value);
-            return;
-        }
-        isLocked[steeringWheel] = value;
+        isLocked = false;
     }
 }
 ```
 
-Then you need to **patch original class**. In our case we need to change displaying text depending on `IsLocked` state. We will patch `OnIsRayed()` methon inside `SteeringWheel` class:
+**You must add `[Serializable]` attribute that our class could be saved.** Also you need to create default constructor with no parameters to initialize class with default values.
+
+**Second**, we need to **create an extension class** to store and handle data:
+
+```csharp
+public static class SteeringWheelExtension
+{
+    private static readonly ConditionalWeakTable<SteeringWheel, SteeringWheelAdditionalData> data = 
+        new ConditionalWeakTable<SteeringWheel, SteeringWheelAdditionalData>();
+
+    public static SteeringWheelAdditionalData GetAdditionalData(this SteeringWheel steeringWheel)
+    {
+        return data.GetOrCreateValue(steeringWheel);
+    }
+
+    public static void AddData(this SteeringWheel steeringWheel, SteeringWheelAdditionalData value)
+    {
+        try
+        {
+            data.Add(steeringWheel, value);
+        }
+        catch (Exception) { }
+    }
+}
+```
+
+Then you need to **patch original class**. In our case we need to change displaying text depending on **`IsLocked`** state. We will patch **`OnIsRayed()`** method inside **`SteeringWheel`** class:
 
 ```csharp
 [HarmonyPatch(typeof(SteeringWheel), "OnIsRayed")]
@@ -46,13 +59,13 @@ class SteeringWheelPatchOnIsRayed
 {
     private static void Postfix(SteeringWheel __instance, ref DisplayTextManager ___displayText)
     {
-        if (!__instance.IsLocked())
+        if (!__instance.GetAdditionalData().isLocked)
             ___displayText.ShowText("Press to LOCK rotation", MyInput.Keybinds["RMB"].MainKey, 2, 0, false);
         else
             ___displayText.ShowText("Press to UNLOCK rotation", MyInput.Keybinds["RMB"].MainKey, 2, 0, false);
 
         if (MyInput.GetButtonDown("RMB"))
-            __instance.Lock(!__instance.IsLocked()); // Toggle bool
+            __instance.GetAdditionalData().isLocked = !__instance.GetAdditionalData().isLocked; // Toggle bool
     }
 }
 ```
@@ -68,7 +81,7 @@ public class BetterSteeringWheel : Mod
 
     public void Start()
     {
-        harmonyInstance = HarmonyInstance.Create("com.whitebrim.bettersteeringwheel"); // It's custom patch name, you need to name your patch differently
+        harmonyInstance = new Harmony("com.whitebrim.bettersteeringwheel"); // It's custom patch name, you need to name your patch differently
         harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
     }
 
@@ -80,82 +93,71 @@ public class BetterSteeringWheel : Mod
 }
 ```
 
-You can access new variable using class instance. `SteeringWheel.IsLocked()`, `SteeringWheel.Lock(bool newValue)`.
+You can access new data using class instance. **`SteeringWheel.GetAdditionalData()`**.
 
 Example for **`float`** and **`string`**:
 
 ```csharp
-public static class CustomExtension
+[Serializable]
+public class YourClassAdditionalData
 {
-    private static Dictionary<YourClass, float> floatVarName = new Dictionary<YourClass, float>();
-    private static Dictionary<YourClass, string> stringVarName = new Dictionary<YourClass, string>();
+    public float floatVar;
+    public string stringVar;
 
-    public static float GetFloatVarName(this YourClass instance)
+    public CustomClassAdditionalData()
     {
-        if (!floatVarName.ContainsKey(instance))
-        {
-            floatVarName.Add(instance, 0); // 0 is default value for floatVarName in our case
-        }
-        return floatVarName[instance];
+        floatVar = 0;
+        stringVar = "None";
+    }
+}
+
+public static class CustomExtension // Nothing changed :)
+{
+    private static readonly ConditionalWeakTable<YourClass, YourClassAdditionalData> data = 
+        new ConditionalWeakTable<YourClass, YourClassAdditionalData>();
+
+    public static YourClassAdditionalData GetAdditionalData(this YourClass yourClass)
+    {
+        return data.GetOrCreateValue(yourClass);
     }
 
-    public static void SetFloatVarName(this YourClass instance, float value)
+    public static void AddData(this YourClass yourClass, YourClassAdditionalData value)
     {
-        if (!floatVarName.ContainsKey(instance))
+        try
         {
-            floatVarName.Add(instance, value);
-            return;
+            data.Add(yourClass, value);
         }
-        floatVarName[instance] = value;
-    }
-
-    public static string GetStringVarName(this YourClass instance)
-    {
-        if (!stringVarName.ContainsKey(instance))
-        {
-            stringVarName.Add(instance, string.Empty); // string.Empty is default value for stringVarName in our case
-        }
-        return stringVarName[instance];
-    }
-
-    public static void SetStringVarName(this YourClass instance, string value)
-    {
-        if (!stringVarName.ContainsKey(instance))
-        {
-            stringVarName.Add(instance, value);
-            return;
-        }
-        stringVarName[instance] = value;
+        catch (Exception) { }
     }
 }
 ```
 
 ## Saving private variables
 
-To save private variables you need to patch `RDG_%RaftClassName%` class and method that is invoked inside switch in `SaveAndLoad` class in `RestoreRGDGame(RGD_Game game)` method.
+To save private variables you need to patch **`RDG_%RaftClassName%`** class and method that is invoked inside switch in **`SaveAndLoad`** class in **`RestoreRGDGame(RGD_Game game)`** method.
 
-In this example we will use `SteeringWheel` class and save `IsLocked` variable \(from `Adding private variables` section\).
+In this example we will use **`SteeringWheel`** class and save data from **`Adding private variables`** section.
 
-**First**, we have to add new link `RGD Class -> our variable` \(Dictionary\):
+**First**, we have to add new link **`RGD Class -> our additional data class`** \(ConditionalWeakTable\):
 
 ```csharp
 public static class SteeringWheelExtension
 {
-    public static Dictionary<RGD_SteeringWheel, bool> RGDisLocked = new Dictionary<RGD_SteeringWheel, bool>();
+    public static ConditionalWeakTable<RGD_SteeringWheel, SteeringWheelAdditionalData> RGD_data = 
+            new ConditionalWeakTable<RGD_SteeringWheel, SteeringWheelAdditionalData>();
 
-    public static void AddLockRGD(this RGD_SteeringWheel RGD_SteeringWheel, SteeringWheel steeringWheel) // For saving
+    public static void AddData(this RGD_SteeringWheel RGD_SteeringWheel, SteeringWheelAdditionalData value)
     {
-        RGD_SteeringWheel.AddLockRGD(steeringWheel.IsLocked());
-    }
-
-    public static void AddLockRGD(this RGD_SteeringWheel RGD_SteeringWheel, bool value) // For loading
-    {
-        RGDisLocked.Add(RGD_SteeringWheel, value);
+        try
+        {
+            RGD_data.Add(RGD_SteeringWheel, value);
+        }
+        catch (Exception) { }
     }
 }
 ```
 
-**Second**, we need to patch `RGD_SteeringWheel` class. There're two constructors \(one for saving, another for loading\) and `GetObjectData` method \(to control flow of Serialization\).
+**Second**, we need to patch **`RGD_SteeringWheel`** class. There're two constructors \(one for saving, another for loading\) and **`GetObjectData`** method \(to control flow of Serialization\).
 
 ```csharp
 class RGD_SteeringWheelPatch
@@ -165,7 +167,7 @@ class RGD_SteeringWheelPatch
     {
         private static void Prefix(RGD_SteeringWheel __instance, ref SteeringWheel steeringWheel)
         {
-            __instance.AddLockRGD(steeringWheel); // Linking this RGD object to variable value
+            __instance.AddData(steeringWheel.GetAdditionalData());
         }
     }
 
@@ -174,12 +176,11 @@ class RGD_SteeringWheelPatch
     {
         private static void Prefix(RGD_SteeringWheel __instance, ref SerializationInfo info)
         {
-            foreach (SerializationEntry serializationEntry in info)
+            try
             {
-                string name = serializationEntry.Name;
-                if (name == "IsLocked") // If you'll open this save without mod installed - it'll not crash your game
-                    __instance.AddLockRGD((bool)serializationEntry.Value); // Linking this RGD object to loaded value
+                __instance.AddData((SteeringWheelAdditionalData)info.GetValue("IsLocked", typeof(SteeringWheelAdditionalData)));
             }
+            catch (Exception) { }
         }
     }
 
@@ -188,30 +189,30 @@ class RGD_SteeringWheelPatch
     {
         private static void Postfix(RGD_SteeringWheel __instance, ref SerializationInfo info)
         {
-            bool value;
-            if (SteeringWheelExtension.RGDisLocked.TryGetValue(__instance, out value))
-                info.AddValue("IsLocked", value); // Getting variable value via link, using this RGD object as a key
+            SteeringWheelAdditionalData value;
+            if (SteeringWheelExtension.RGD_data.TryGetValue(__instance, out value))
+                info.AddValue("IsLocked", value);
         }
     }
 }
 ```
 
-**Lastly**, we need to find method that loads saved block data and patch it. This method is invoked inside switch in `SaveAndLoad` class in `RestoreRGDGame(RGD_Game game)` method:
+**Lastly**, we need to find method that loads saved block data and patch it. This method is invoked inside switch in **`SaveAndLoad`** class in **`RestoreRGDGame(RGD_Game game)`** method:
 
 ```csharp
 switch (rgd.type)
     {
     case RGDType.Block:
     {
-      //Some code
+      // Important code
       break;
     }
     case RGDType.Block_Door:
     {
-      //Some code
+      // Important code
       break;
     }
-    //etc...
+    // etc...
 ```
 
 Our _case_:
@@ -233,7 +234,7 @@ case RGDType.Block_SteeringWheel:
     }
 ```
 
-In our case method is called `RestoreWheel(RGD_SteeringWheel rgdWheel)`. This method contains instructions on how to deserialize RGD class to retrieve saved data. We will add our custom instructions:
+In our case method is called **`RestoreWheel(RGD_SteeringWheel rgdWheel)`**. This method contains instructions on how to deserialize RGD class to retrieve saved data. We will add our custom instructions:
 
 ```csharp
 [HarmonyPatch(typeof(SteeringWheel), "RestoreWheel")]
@@ -241,12 +242,13 @@ class SteeringWheelRestoreWheelPatch
 {
     private static void Prefix(SteeringWheel __instance, RGD_SteeringWheel rgdWheel)
     {
-        bool value;
-        if (SteeringWheelExtension.RGDisLocked.TryGetValue(rgdWheel, out value)) // Using RGD class as a key to get isLocked value, check if save had data about isLocked state
-            __instance.Lock(value);
+        SteeringWheelAdditionalData value;
+        if (SteeringWheelExtension.RGD_data.TryGetValue(rgdWheel, out value))
+            __instance.AddData(value);
     }
 }
 ```
 
 **Congratulations**, our custom data for Steering Wheel is saving and loading successfully.
 
+Full code you can find downloading [Better Steering Wheel](https://www.raftmodding.com/mods/better-steering-wheel) mod.
