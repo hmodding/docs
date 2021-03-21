@@ -178,7 +178,7 @@ class RGD_SteeringWheelPatch
         {
             try
             {
-                __instance.AddData((SteeringWheelAdditionalData)info.GetValue("IsLocked", typeof(SteeringWheelAdditionalData)));
+                __instance.AddData(JsonUtility.FromJson<SteeringWheelAdditionalData>(info.GetString("AdditionalData"))); // Loads from Json that we will create in GetObjectData
             }
             catch (Exception) { }
         }
@@ -191,7 +191,7 @@ class RGD_SteeringWheelPatch
         {
             SteeringWheelAdditionalData value;
             if (SteeringWheelExtension.RGD_data.TryGetValue(__instance, out value))
-                info.AddValue("IsLocked", value);
+                info.AddValue("AdditionalData", JsonUtility.ToJson(value)); // We need to use json because worlds loads before mod compiles
         }
     }
 }
