@@ -5,7 +5,7 @@ Modifying private variables is clearly necessary when modding raft. Let's see ho
 To modify private variables we need to use **Harmony**. You can visit the Harmony wiki by clicking [here](https://github.com/pardeike/Harmony/wiki).  
 _`Harmony is a library for patching, replacing and decorating .NET and Mono methods during runtime.`_  
   
-To use harmony you simply need to add the `Harmony` namespace by adding `using Harmony;` at the top of your class.
+To use harmony you simply need to add the `HarmonyLib` namespace by adding `using HarmonyLib;` at the top of your class.
 
   
 To modify a **non-static private variable** you use Traverse.Create\(\) with the object instance, .Field\(\) with the field name and .SetValue\(\)

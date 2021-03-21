@@ -17,7 +17,6 @@ RConsole.Log("The player name is " + username);
 {% endtab %}
 {% endtabs %}
 
-  
 Toggle the mouse cursor.
 
 {% tabs %}
@@ -35,7 +34,6 @@ RAPI.ToggleCursor(false); // This will hide the cursor.
 {% endtab %}
 {% endtabs %}
 
-  
 Register a new item.
 
 {% tabs %}
@@ -55,7 +53,6 @@ RAPI.RegisterItem(yournewitem);
 {% endtab %}
 {% endtabs %}
 
-  
 Set an item prefab.
 
 {% tabs %}
@@ -79,7 +76,6 @@ RAPI.SetItemObject(yournewitem, asset.LoadAsset<GameObject>("yournewitem"));
 {% endtab %}
 {% endtabs %}
 
-  
 Gets the local Network\_Player script.
 
 {% tabs %}
@@ -97,7 +93,6 @@ Network_Player player = RAPI.GetLocalPlayer();
 {% endtab %}
 {% endtabs %}
 
-  
 Give an item to the local player.
 
 {% tabs %}
@@ -115,7 +110,23 @@ RAPI.GiveItem(ItemManager.GetItemByName("raw_potato"),10);
 {% endtab %}
 {% endtabs %}
 
-  
+Broadcast a chat message.
+
+{% tabs %}
+{% tab title="Method" %}
+```csharp
+void BroadcastChatMessage(string message)
+```
+{% endtab %}
+
+{% tab title="Example" %}
+```
+RAPI.BroadcastChatMessage("I'm a message");
+// Will send "I'm a message" to every players.
+```
+{% endtab %}
+{% endtabs %}
+
 Allow the placement of a block on the grid system.
 
 {% tabs %}
@@ -133,7 +144,6 @@ RAPI.AddItemToBlockQuadType(YourNewItem, RBlockQuadType.quad_foundation);
 {% endtab %}
 {% endtabs %}
 
-  
 Disallow the placement of a block on the grid system.
 
 {% tabs %}
@@ -147,33 +157,53 @@ void RemoveItemFromBlockQuadType(string itemUniqueName, RBlockQuadType quadtype)
 ```csharp
 RAPI.RemoveItemFromBlockQuadType("YourItemUniqueName", RBlockQuadType.quad_foundation);
 // Disallow the item with the uniquename "YourItemUniqueName" to be placed on foundations.
+
 ```
 {% endtab %}
 {% endtabs %}
 
-  
-Get a mod attribute.
+Listen for network messages on a specific network channel. \(0 and 1 are locked for the game and can't be used\)
 
 {% tabs %}
 {% tab title="Method" %}
 ```csharp
-string GetModTitle(Type modClass)
-string GetModDescription(Type modClass)
-string GetModAuthor(Type modClass)
-string GetModVersion(Type modClass)
-string GetModRaftVersion(Type modClass)
-string GetModIconUrl(Type modClass)
-string GetModWallpaperUrl(Type modClass)
-string GetModVersionCheckUrl(Type modClass)
-bool GetModIsPermanent(Type modClass)
+NetworkMessage ListenForNetworkMessagesOnChannel(int channel = 0)
 ```
 {% endtab %}
 
 {% tab title="Example" %}
 ```csharp
-RAPI.GetModVersion(typeof(YourModClass))
-// This will return your mod version attribute value as a string.
-// Only RAPI.GetModIsPermanent(Type modClass) returns a bool.
+// Choose a unique ID for the channel id to not interfer with other mods.
+NetworkMessage netMessage = RAPI.ListenForNetworkMessagesOnChannel(30);
+if (netMessage != null)
+{
+  CSteamID id = netMessage.steamid;
+  Message message = netMessage.message;
+  // Here we use 5000 because we can't modify an enum, you can use any values 
+  // as long as its not in the Messages enum already. Bigger than 1000 is perfect.
+  if(message.Type == (Messages)5000){
+    // Do your stuff with the message now that you know 
+    // its yours and its the wanted type.
+    YourMessageClass msg = message as YourMessageClass;
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+Send a network message to all players.
+
+{% tabs %}
+{% tab title="Method" %}
+```csharp
+void SendNetworkMessage(Message message, int channel = 0, EP2PSend ep2psend = EP2PSend.k_EP2PSendReliable, Target target = Target.Other, CSteamID fallbackSteamID = new CSteamID())
+```
+{% endtab %}
+
+{% tab title="Example" %}
+```csharp
+// This will send your network message to all players.
+RAPI.SendNetworkMessage(new YourMessageClass((Messages)5000));
 ```
 {% endtab %}
 {% endtabs %}
