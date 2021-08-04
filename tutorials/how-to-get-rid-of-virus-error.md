@@ -43,6 +43,8 @@ The two files are those ones :
 * `RMLLauncher.exe`
 * `C:\Users\Your user name\AppData\Roaming\RaftModLoader`
 
+Dont forget to change out "your user name" for your own name for it to properly work. Only copy-pasting without the change wont work.
+
 {% tabs %}
 {% tab title="Windows Defender" %}
 To add the exceptions in Windows Defender you can follow the next link :  
@@ -75,7 +77,14 @@ Type on google "How to add an exclusion in " and the name of your antivirus afte
 {% endtab %}
 {% endtabs %}
 
-## 3. Try to start the game through RMLLauncher
+## 3. Still not working? Check your antivirus quarantine
+
+To check if your antivirus is properly set up, or if something have slipped through the exclusions, check for anything related to Raft Mod Loader in your antivirus quarantine. 
+For example, HMLCore.exe in "C:\Users\Your user name\AppData\Roaming\RaftModLoader" is commonly detected by antivirus softwares and moved to quarantine. 
+If this issue occurs, simply restore the file and add exclusion to it specifically too. This issue commonly arises if your added exclusions werent typed correctly. Eg. making a typo or forgetting to put in your own username. 
+A restart of the computer and re-installation of the mod loader may be needed before it will work properly after following all the steps above.
+
+## 4. Try to start the game through RMLLauncher
 
 If after that you have another error or you still get the same error, go in the \#support channel of the [Raft Modding discord server](https://discord.gg/r83T8Q) and we will be glad to help you🙂
 
