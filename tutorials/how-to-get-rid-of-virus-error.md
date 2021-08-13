@@ -8,7 +8,7 @@ description: >-
 
 ## 0. Why is my antivirus suspecting RMLLauncher to be a Trojan/Malware ?
 
-RMLLauncher is injecting code \(mods\) in a running process \(the game\), and this is a very suspicious action. As a mod launcher we need to do this, but it's not a "normal behavior" for a software. Then your antivirus is flagging it as a Trojan or a malware that try to hide himself in others applications.  
+RMLLauncher is injecting code \(mods\) in a running process \(the game\), and this is a very suspicious action. As a mod launcher we need to do this, but it's not a "normal behavior" for a software. Then your antivirus is flagging it as a Trojan or a malware that try to hide itself in others applications.  
 If you are worried and not sure if you want to download it because of that, you can go on the[ RaftModding discord server](https://discord.gg/r83T8Q) or on the [official raft server](https://discord.gg/raft) to ask on the modding area what others user thinks of RML.
 
 {% hint style="success" %}
