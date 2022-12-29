@@ -8,53 +8,40 @@ description: >-
 
 ## How to install RaftModLoader on Linux
 
-The person who wrote this guide loves Linux, free-and-open-source stuff, he uses Bash instead of PowerShell and Clangd+Vim instead of Visual Studio. After installing Ubuntu and playing some other games on it, he discovered a unique piece of software: [Wine](https://winehq.org). This made him able to run Raft...
+Prerequisites:
+- Steam
+- winetricks
+- wine.x86_64
+- wine.i686
 
-Going on, the first thing you need to do is:
+### 1. Get Raft
 
-### 0. Get Raft
+Install Steam, preferably in a new Wine prefix. E.g.
+`env WINEPREFIX=/home/user/.wine-raft WINEARCH=win64 winetricks steam`
+You might have to start Steam the first time like `Steam.exe -noreactlogin` to be able to log in.
+Then install Raft as normal in this new Wine environment.
 
-Go to your Windows PC, find the Raft installation folder \(explained [here](https://support.steampowered.com/kb_article.php?ref=7418-YUBN-8129)\) and copy it over to your Linux computer. On my desktop it's placed in `~/Desktop/Raft`, so change the paths accordingly to where yours is located.
+### 2. Install .NET 4.6.2 into Raft's wine prefix
 
-### 1. Download the Launcher
+Install dotnet462 by running:
+`env WINEPREFIX=/home/user/.wine-raft WINEARCH=win64 winetricks dotnet462`
+Sometimes the installation hangs, but just restarting the winetricks command and go through the process once more usually fixes it. You have to choose "Repair" if presented with the option of either removing or repairing the .NET-installation, of course.
 
-The same as you would do on Windows. Go to the [download page](https://www.raftmodding.com/download) and place it somewhere \(for example, I placed it in `~/Desktop/Raft` - my Raft folder\).
+### 3. Download the Launcher
 
+The same as you would do on Windows. Go to the [download page](https://www.raftmodding.com/download) and place it where you want.
 ![](../../.gitbook/assets/download.png)
 
-### 2. Install Mono and .NET 4.6
+### 4. Add a library override for winhttp so RaftModLoader is able to use doorstop
 
-First of all, if you haven't already, install `winetricks`. On Ubuntu it's just `sudo apt install winetricks`.
+You have to make sure that the builtin library "winhttp" is marked as native in the wine overlay, or else the doorstop code used for injecting the mod loader will not work.
+Run `env WINEPREFIX=/home/user/.wine-raft WINEARCH=win64 winecfg`, go to the Libraries-tab, and then write in "*winhttp" with the asterisk (but without the quotation marks) in the "New override for library:" box and then press "Add". Then exit winecfg.
 
-Then download Mono 5.0 .MSI from [this link](https://dl.winehq.org/wine/wine-mono/5.0.0/wine-mono-5.0.0-x86.msi) and run `wine uninstaller` to launch the Add & Remove Software dialog. Point it to the downloaded installer and wait until it completes. After installing Mono, you need another thing: .NET 4.6. It can be installed from Terminal using `winetricks dotnet46`. It'll warn you about Windows Modules Installation Service missing but that's not a problem.
+### 5. Run RaftModLoader
 
-### 3. \(Recommended\) Install DXVK for better performance
+Run RMLLauncher via Wine: `env WINEPREFIX=/home/user/.wine-raft WINEARCH=win64 wine RMLLauncher.exe`. It'll find the Raft folder automatically since you have Steam installed in the prefix, but if it for some reason doesn't, then browse to it manually. Then just use RaftModLoader as you would on Windows.
 
-If your graphics card supports Vulkan rendering then you shouldn't skip this step. Grab a release from [here](https://github.com/doitsujin/dxvk/releases/latest), unpack the archive to `~/Downloads/` and run this in Terminal from the `~/Downloads/dxvk_x.y.z` directory where x.y.z is the version:
+### Addendum
+The easiest way to install mods are just downloading the .rmod files and just place them directly in the Mods-subfolder in Raft which RMLLauncher.exe should've created for you. It'll be in /home/user/.wine-raft/drive_c/your_steamapps_path/common/Raft/Mods.
 
-```bash
-WINEPREFIX="$(dirname ~/.wine)/.wine" ./setup_dxvk.sh install
-```
-
-![](../../.gitbook/assets/dxvk.png)
-
-### 4. Use RaftModLoader as you're on Windows
-
-Run RMLLauncher via Wine: `wine64 ~/Downloads/RMLLauncher.exe`. It'll ask you for your Raft folder. From what I've checked, updating is fine, injections work and Raft starts. If you have issues, contact @null\#0170 on Discord.
-
-## Known Issues
-
-### Raft won't respond after Alt+Tab
-
-There's nothing I can do to that - it's a issue that happens on many other Unity games, especially when they're running on Wine. From what I've seen, changing focus to a window on another monitor doesn't trigger this.
-
-### Injection failed
-
-Wait a second, Raft will open and mods will still work.
-
-### The program `csc.exe` has stopped unexpectedly
-
-I think this can be fixed by using Mono's `csc` but that would probably involve changes in RML's code.
-
-## Written by [@RMuskovets](https://github.com/RMuskovets) AKA @null\#0170
-
+(The install-mod-through-browser method usually doesn't work without you adding a handler for rmllauncher:// URLs, but the only thing that the installing procedure does is placing .rmod files in Raft's Mods-folder.)
